@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+    <configuration>
+        <custom-converters>
+
+            <converter type="de.tumitfahrer.assembler.util.DateStringConverter" >
+                <class-a>java.util.Date</class-a>
+                <class-b>java.lang.String</class-b>
+            </converter>
+
+            <converter type="de.tumitfahrer.assembler.util.RideIntegerConverter" >
+                <class-a>de.tumitfahrer.entities.Ride</class-a>
+                <class-b>java.lang.Integer</class-b>
+            </converter>
+
+        </custom-converters>
+    </configuration>
+
+    <mapping type="one-way">
+        <class-a>de.tumitfahrer.entities.User</class-a>
+        <class-b>de.tumitfahrer.dtos.user.response.UserDTO</class-b>
+        <field>
+            <a is-accessible="true" get-method="isStudent">isStudent</a>
+            <b is-accessible="true" set-method="setStudent">isStudent</b>
+        </field>
+    </mapping>
+
+</mappings>

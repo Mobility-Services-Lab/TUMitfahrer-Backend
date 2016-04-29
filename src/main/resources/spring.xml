@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <tx:annotation-driven proxy-target-class="true" />
+    <context:annotation-config />
+
+    <context:component-scan base-package="de.tumitfahrer.daos.impl" />
+    <context:component-scan base-package="de.tumitfahrer.services" />
+    <context:component-scan base-package="de.tumitfahrer.security" />
+    <context:component-scan base-package="de.tumitfahrer.security.controller" />
+    <context:component-scan base-package="de.tumitfahrer.controller" />
+    <context:component-scan base-package="de.tumitfahrer.util" />
+    <context:component-scan base-package="de.tumitfahrer.assembler" />
+
+    <bean id="mailService" class="de.tumitfahrer.services.MailService" init-method="init" />
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://${db.host}:${db.port}/${db.table}" />
+        <property name="username" value="${db.username}" />
+        <property name="password" value="${db.password}" />
+    </bean>
+
+    <!-- Database migration -->
+    <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate" depends-on="dataSource">
+        <property name="dataSource" ref="dataSource" />
+        <property name="locations" value="classpath:db/migration/" />
+
+        <!-- On an empty database, migrate will initialize the database with version 1 -->
+        <property name="baselineOnMigrate" value="true" />
+        <property name="validateOnMigrate" value="false" />
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" depends-on="flyway">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation">
+            <value>classpath:hibernate.cfg.xml</value>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="javax.persistence.validation.factory">#{validator}</prop>
+                <!-- <prop key="javax.persistence.validation.mode">none</prop> -->
+            </props>
+        </property>
+        <property name="packagesToScan" value="de.tumitfahrer.entities" />
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+          p:sessionFactory-ref="sessionFactory">
+    </bean>
+
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+    <bean id="org.dozer.Mapper" class="org.dozer.DozerBeanMapper">
+        <property name="mappingFiles">
+            <list>
+                <value>dozer-mappings.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <util:properties id="deLng" location="classpath:lng/de.ini"/>
+    <util:properties id="enLng" location="classpath:lng/en.ini"/>
+
+    <util:properties id="validationMessages" location="classpath:ValidationMessages.properties" />
+
+    <beans profile="dev,default">
+        <context:property-placeholder location="classpath*:dev.properties"/>
+    </beans>
+
+    <beans profile="productive">
+        <context:property-placeholder location="classpath*:productive.properties"/>
+    </beans>
+
+    <beans profile="testing">
+        <context:property-placeholder location="classpath*:test.properties"/>
+    </beans>
+
+</beans>

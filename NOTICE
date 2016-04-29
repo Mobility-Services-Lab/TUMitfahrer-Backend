@@ -1,0 +1,41 @@
+TUMitfahrer v2.2
+Copyright 2016 Technische Universität München
+
+Licenses for third party references:
+    cglib.cglib v2.2.2 under ASF 2.0
+
+    Jackson Annotations v2.6.3 under The Apache Software License, Version 2.0
+    Jackson Core v2.6.3 under The Apache Software License, Version 2.0
+    Jackson Databind v2.6.3 under The Apache Software License, Version 2.0
+    Jackson Dataformat Smile v2.6.3 under The Apache Software License, Version 2.0
+    Jackson JAXRS JSON Provider v2.6.3 under The Apache Software License, Version 2.0
+    Jackson Module JAXB Annotations v2.6.3 under The Apache Software License, Version 2.0
+    com.owlike.genson v0.99 under Apache Software License Version 2.0
+    Swagger Jersey2 Jaxrs 2.10 v1.3.13 under Apache License 2.0
+    Commons DBCP v1.2.2 under /LICENSE.txt
+    Commons IO v1.3.2 under The Apache Software License, Version 2.0
+    Apache Commons Validator v1.4.1 under Apache License, Version 2.0
+    JavaMail API (compat) v1.4.7 under CDDL-GPLv2+CE
+    Persistence Api v1 under Common Development and Distribution License (CDDL) v1.0
+    net.sf.dozer.dozer v5.5.1 under Apache License, Version 2.0
+    Apache Geronimo Servlet 3.0 Spec v1 under The Apache Software License, Version 2.0
+    Apache Log4j v2.3 under The Apache Software License, Version 2.0
+    Apache Log4j Core v2.3 under The Apache Software License, Version 2.0
+    Flyway Core v3.2.1 under Apache License, Version 2.0
+    Jersey All (Rebundled) under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL - Version 1.1) or GNU GENERAL PUBLIC LICENSE (GPL Version 2, June 1991)
+    jersey-container-servlet v2.5 under CDDL+GPL License
+    jersey-core-client v2.5 under CDDL+GPL License
+    jersey-core-common v2.5 under CDDL+GPL License
+    jersey-core-server v2.5 under CDDL+GPL License
+    Jersey Ext Bean Validation v2.5 under CDDL+GPL License
+    Jersey Spring3 v2.5 under CDDL+GPL License
+    Jersey Media Multipart v2.5 under CDDL+GPL License
+    Jersey Test Framework Provider Inmemory v2.5 under CDDL+GPL License
+    Core Hibernate O/RM Functionality v4.3.9.Final under GNU Lesser General Public License
+    JSON In Java v20141113 under The JSON License
+    Spring Context v4.1.6.RELEASE under The Apache Software License, Version 2.0
+    Spring Core v4.1.6.RELEASE under The Apache Software License, Version 2.0
+    Spring Object/Relational Mapping v4.1.6.RELEASE under The Apache Software License, Version 2.0
+    Spring Transaction v4.1.6.RELEASE under The Apache Software License, Version 2.0
+    Spring Web MVC v4.1.6.RELEASE under The Apache Software License, Version 2.0
+    PostgreSQL JDBC Driver v9.1-901.jdbc4 under BSD License

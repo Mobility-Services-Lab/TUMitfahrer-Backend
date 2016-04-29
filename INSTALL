@@ -1,0 +1,36 @@
+## Prerequisites ##
+
+# Java JDK 8
+# Apache Maven 3.3
+# Apache Tomat 7
+# PostgresSQL 9
+
+
+
+## Setup ##
+
+1. Checkout the code
+2. Import the database file from the db folder into your postgres database
+3. Complete the dev.properties and/or productive.properties in the resource folder
+    1. Enter a series of valid emails for which the registration is permitted
+    2. Enter the credentials for your mail server
+    3. Enter the credentials for your database. The username should be the same who owns the tables from the initial db import.
+4. Package the application to a WAR file with
+5. mvn -Dmaven.test.skip=true clean package
+6. Move the file to your tomcat directory / webapps folder and start tomcat. The backend should be accessible via http://127.0.0.1:8080/TUMitfahrer/
+
+
+
+## Switching from Development to Production ##
+
+Change the spring.profiles.default value in the file WEB-INF/web.xml from default (development) to production
+
+
+
+## Running Tests ##
+
+You can either run unit or integration tests.
+# Unit Tests, Execute mvn clean test
+# Integration Tests (includes Unit tests by default)
+## Fill in the credentials for a test database in test.properties
+## Execute mvn -Dspring.profiles.active=testing clean verify
